@@ -5,7 +5,7 @@ I have been attempting to learn to code properly since I was about 10 years old.
 When I code, I tend to experiment and make the code more compact until I break it. I've started this repository as a way to keep track of all those little updates I make.
 
 I am learning:
-      * PHP
-      * JavaScript
-      * MySQL
-      * Updating my knowledge of HTML5
+      - PHP
+      - JavaScript
+      - MySQL
+      - Updating my knowledge of HTML5
