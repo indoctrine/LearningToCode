@@ -3,3 +3,7 @@ foo.php
 .DS_Store
 ._foo.php
 ._.DS_Store
+._.DS_Store
+._foo.php
+.DS_Store
+*.DS_Store
