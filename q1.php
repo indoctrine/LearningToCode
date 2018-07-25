@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+      require_once('strict-typing.php');
 
 /*
                     Discrete Mathematics for Computing
@@ -49,7 +50,8 @@
     <?php
 
       if(isset($_POST['submit'])){
-        $numberlist = $_POST["numberlist"];
+        $numberlist = $_POST['numberlist'];
+        ForceArrayType($numberlist, FLOAT);
         $i = 0;
         $x = 0;
         echo "<br><br>You entered: <br>";

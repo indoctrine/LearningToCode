@@ -7,6 +7,9 @@
     24 July 2018
       - File created.
       - Added numerical validation to float and int.
+    25 July 2018
+      - Added function for forcing arrays to a particular type.
+      - Learnt about passing by reference (&$) vs passing by value ($).
 */
 
 const INT = 0;
@@ -24,5 +27,19 @@ function GetPost($key, $type, $defaultval){
     case FLOAT:
       return is_numeric($value) ? floatval($value) : false;
     }
+}
+
+function ForceArrayType(&$arraytoforce, $type){
+  foreach($arraytoforce as &$arrayelements){
+    switch($type){
+      case INT:
+        $arrayelements = is_numeric($arrayelements) ? intval($arrayelements) : false;
+      case STRING:
+        return $arrayelements;
+      case FLOAT:
+        $arrayelements = is_numeric($arrayelements) ? floatval($arrayelements) : false;
+    }
+  }
+  unset($arrayelements);
 }
 ?>
