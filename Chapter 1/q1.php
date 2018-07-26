@@ -37,7 +37,7 @@
     </style>
     <form id="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
       <div id="inputs">
-        <p>Number 1:</p> <input type="number" name="numberlist[]"><br>
+        <p>Number 1:</p> <input type="number" name="numberlist[]" step="any"><br>
       </div>
       <p id="errormsg" style="color: #FF0000"></p>
       <input id="addmore" type="button" value="Add more inputs" onClick="addinput('inputs')">

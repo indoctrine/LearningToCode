@@ -10,6 +10,11 @@
     25 July 2018
       - Added function for forcing arrays to a particular type.
       - Learnt about passing by reference (&$) vs passing by value ($).
+    26 July 2018
+      - Updated code to remove second pass by reference on $value. This was
+        referencing the value in the array itself, kind of circularly.
+        &$arraytoforce -> $actualarray
+        &$value -> $originalarrayvalue
 */
 
 const INT = 0;
@@ -30,16 +35,18 @@ function GetPost($key, $type, $defaultval){
 }
 
 function ForceArrayType(&$arraytoforce, $type){
-  foreach($arraytoforce as &$arrayelements){
+  foreach($arraytoforce as $index => $value){
+  //foreach($arraytoforce as $index => &$value){
     switch($type){
       case INT:
-        $arrayelements = is_numeric($arrayelements) ? intval($arrayelements) : false;
+        $value = is_numeric($value) ? intval($value) : false;
       case STRING:
-        return $arrayelements;
+        return $value;
       case FLOAT:
-        $arrayelements = is_numeric($arrayelements) ? floatval($arrayelements) : false;
+        $value = is_numeric($value) ? floatval($value) : false;
     }
+    $arraytoforce[$index] = $value;
   }
-  unset($arrayelements);
+  unset($value);
 }
 ?>

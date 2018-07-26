@@ -11,8 +11,9 @@ function addinput(div){
     var newp = document.createElement('p');
     newp.innerHTML = "Number " + parseInt(counter + 1)  + ": ";
     var newinput = document.createElement('input');
-    newinput.name = "numberlist[]";
     newinput.type = "number";
+    newinput.name = "numberlist[]";
+    newinput.step = "any";
 
     document.getElementById('inputs').appendChild(newp);
     document.getElementById('inputs').appendChild(newinput);
