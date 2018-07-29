@@ -15,6 +15,9 @@
         referencing the value in the array itself, kind of circularly.
         &$arraytoforce -> $actualarray
         &$value -> $originalarrayvalue
+    29 July 2018
+      - Updated code to use return rather than pass by value. Kept the pass by
+        ref code just in case.
 */
 
 const INT = 0;
@@ -26,7 +29,7 @@ function GetPost($key, $type, $defaultval){
 
   switch($type){
     case INT:
-      return is_numeric($value) ? intval($value) : false;
+      return is_numeric($value) ? intval(round($value)) : false;
     case STRING:
       return $value;
     case FLOAT:
@@ -34,7 +37,26 @@ function GetPost($key, $type, $defaultval){
     }
 }
 
-function ForceArrayType(&$arraytoforce, $type){
+function ForceArrayType($arraytoforce, $type){
+  foreach($arraytoforce as $index => $value){
+    switch($type){
+      case INT:
+        $arraytoforce[$index] = is_numeric($value) ? intval($value) : false;
+        break;
+      case STRING:
+        $arraytoforce[$index] = $value;
+        break;
+      case FLOAT:
+        $arraytoforce[$index] = is_numeric($value) ? floatval($value) : false;
+        break;
+      default:
+         $arraytoforce[$index] = false;
+    }
+  }
+    return $arraytoforce;
+}
+
+/*function ForceArrayType(&$arraytoforce, $type){
   foreach($arraytoforce as $index => $value){
   //foreach($arraytoforce as $index => &$value){
     switch($type){
@@ -48,5 +70,5 @@ function ForceArrayType(&$arraytoforce, $type){
     $arraytoforce[$index] = $value;
   }
   unset($value);
-}
+}*/
 ?>

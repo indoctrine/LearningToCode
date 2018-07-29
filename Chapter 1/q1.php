@@ -20,6 +20,10 @@
               4.1. If x(i) < min then
                   4.1.1. min <- x(i)
           5. Output min
+
+    CHANGES:
+      - 29 July 2018, changed numberlist array to work with return value from
+        strict-typing.php
 */
 
 ?>
@@ -50,8 +54,9 @@
     <?php
 
       if(isset($_POST['submit'])){
-        $numberlist = $_POST['numberlist'];
-        ForceArrayType($numberlist, FLOAT);
+        //$numberlist = $_POST['numberlist'];
+        //ForceArrayType($numberlist, FLOAT);
+        $numberlist = ForceArrayType($_POST['numberlist'], FLOAT);
         $i = 0;
         $x = 0;
         echo "<br><br>You entered: <br>";

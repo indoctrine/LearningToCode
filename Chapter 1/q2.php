@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-
+      require_once('../strict-typing.php');
 /*
                     Discrete Mathematics for Computing
                                 Chapter 1
@@ -12,6 +12,10 @@
       - Learnt about null coalesce operator which is a ternary shortcut for isset
       - Learnt about array key pairs
       - Learnt about the concatenation operator
+
+    CHANGES:
+      - 29 July 2018, updated code to use strict-typing function and removed
+        superfluous parts of validation.
 */
 
 ?>
@@ -42,9 +46,9 @@
 
         foreach($unitmap as $unit => $secsperunit){
 
-          $value = $_POST[$unit] ?? 0; //Ternary isset (null coalesce)
+          $value = GetPost($unit, INT, 0);
 
-          if(!is_numeric($value) || $value < 0 || is_null($value)){
+          if($value < 0){
             $value = 0;   //Validation
           }
 
