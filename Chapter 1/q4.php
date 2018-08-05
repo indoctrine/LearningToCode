@@ -34,6 +34,7 @@
       - 24 July 2018 - Replaced a portion of the code with a function. Added the
         strict typing helper script for $_POST.
       - 25 July 2018 - Made variable assignment in line with validate().
+      - 5 August 2018 - Updated double quotes to singles.
 
 */
 
@@ -44,7 +45,7 @@
     <title>Question 4 - Local</title>
   </head>
   <body>
-    <form id="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    <form id="form" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
       <div id="inputs">
         Purchase Price: $<input type="number" name="pprice" step="any"><br>
         Amount Tendered: $<input type="number" name="tendered" step="any"><br>
@@ -57,24 +58,24 @@
       if(isset($_POST["submit"])){
         function validate($input){
           if($input <= 0){
-            exit("Please enter a positive number.");
+            exit('Please enter a positive number.');
           }
         }
 
         $change = 0;
 
-        validate($pprice = GetPost("pprice", FLOAT, 0));
-        validate($tendered = GetPost("tendered", FLOAT, 0));
+        validate($pprice = GetPost('pprice', FLOAT, 0));
+        validate($tendered = GetPost('tendered', FLOAT, 0));
 
         if($tendered < $pprice){
-          exit("You do not have enough money to complete this transaction");
+          exit('You do not have enough money to complete this transaction');
         }
 
         $change = $tendered - $pprice;
 
-        echo "Purchase Price: $" . number_format($pprice, 2);
-        echo "<br> Amount Tendered: $" . number_format($tendered, 2);
-        echo "<br> Change Due: $" . number_format($change, 2);
+        echo 'Purchase Price: $' . number_format($pprice, 2);
+        echo '<br> Amount Tendered: $' . number_format($tendered, 2);
+        echo '<br> Change Due: $' . number_format($change, 2);
       }
     ?>
   </body>

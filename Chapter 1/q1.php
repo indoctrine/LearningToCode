@@ -24,6 +24,7 @@
     CHANGES:
       - 29 July 2018, changed numberlist array to work with return value from
         strict-typing.php
+      - 5 August 2018 - Updated double quotes to singles.
 */
 
 ?>
@@ -39,7 +40,7 @@
         white-space: pre;
       }
     </style>
-    <form id="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    <form id="form" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
       <div id="inputs">
         <p>Number 1:</p> <input type="number" name="numberlist[]" step="any"><br>
       </div>
@@ -59,7 +60,7 @@
         $numberlist = ForceArrayType($_POST['numberlist'], FLOAT);
         $i = 0;
         $x = 0;
-        echo "<br><br>You entered: <br>";
+        echo '<br><br>You entered: <br>';
         foreach($numberlist as $eachinput){
 
           $x++;
@@ -78,7 +79,7 @@
             $minloc = $x;
           }
 
-          echo $eachinput . "<br>";
+          echo $eachinput . '<br>';
 
           if(!isset($max) || $eachinput > $max){
             $max = $eachinput;
@@ -88,10 +89,11 @@
         }
 
         $count = count($numberlist) - $i;
-        echo "<br> The smallest number is " . $min . " which was located in box number " . $minloc;
-        echo "<br> The largest number is " . $max . " which was located in box number " . $maxloc;
+        echo "<br> The smallest number is $min which was located in box number $minloc";
+        echo "<br> The largest number is  $max which was located in box number $maxloc";
         $avg = array_sum($numberlist) / $count;
-        echo "<br> The average is " . $avg;
+        echo '<br> The total sum of the numbers is ' . array_sum($numberlist);
+        echo "<br> The average is $avg";
     }
       ?>
   </body>

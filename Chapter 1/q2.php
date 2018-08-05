@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
       require_once('../strict-typing.php');
+      require_once('../helperfunctions.php');
 /*
                     Discrete Mathematics for Computing
                                 Chapter 1
@@ -16,6 +17,8 @@
     CHANGES:
       - 29 July 2018, updated code to use strict-typing function and removed
         superfluous parts of validation.
+      - 5 August 2018 - Updated double quotes to singles. Included helper functions
+        file and implemented pluraliser.
 */
 
 ?>
@@ -25,7 +28,7 @@
     <title>Question 2 - Local</title>
   </head>
   <body>
-    <form id="form" method="POST" action="<?=htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    <form id="form" method="POST" action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>">
       <div id="inputs">
         Hours: <input type="number" name="hour"><br>
         Minutes: <input type="number" name="minute"><br>
@@ -37,12 +40,12 @@
     </form>
     <br>
     <?php
-      if(isset($_POST["submit"])){
+      if(isset($_POST['submit'])){
         $total = 0;
         $unitmap = array(
-          "hour" => 3600,
-          "minute" => 60,
-          "second" => 1);
+          'hour' => 3600,
+          'minute' => 60,
+          'second' => 1);
 
         foreach($unitmap as $unit => $secsperunit){
 
@@ -54,12 +57,12 @@
 
           $total += $value * $secsperunit;
 
-          $unit .= ($value != 1 ? "s" : "");
+          $unit .= pluraliser($value);
 
           echo "$value $unit ";
         }
 
-        echo "<br> Totals: " . $total . " second" . ($total != 1 ? "s." : ".");
+        echo "<br> Totals: $total second" . pluraliser($total) . '.';
       }
     ?>
   </body>
