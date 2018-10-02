@@ -18,6 +18,10 @@
     29 July 2018
       - Updated code to use return rather than pass by value. Kept the pass by
         ref code just in case.
+    2 October 2018
+      - Updated to use type declarations rather than math functions.
+      - Corrected array forcing function to include rounding on integer values,
+        omitted by mistake in the first place.
 */
 
 const INT = 0;
@@ -29,11 +33,11 @@ function GetPost($key, $type, $defaultval){
 
   switch($type){
     case INT:
-      return is_numeric($value) ? intval(round($value)) : false;
+      return is_numeric($value) ? (int) round($value) : false;
     case STRING:
-      return $value;
+      return (string) $value;
     case FLOAT:
-      return is_numeric($value) ? floatval($value) : false;
+      return is_numeric($value) ? (float) $value : false;
     }
 }
 
@@ -41,13 +45,13 @@ function ForceArrayType($arraytoforce, $type){
   foreach($arraytoforce as $index => $value){
     switch($type){
       case INT:
-        $arraytoforce[$index] = is_numeric($value) ? intval($value) : false;
+        $arraytoforce[$index] = is_numeric($value) ? (int) round($value) : false;
         break;
       case STRING:
-        $arraytoforce[$index] = $value;
+        $arraytoforce[$index] = (string) $value;
         break;
       case FLOAT:
-        $arraytoforce[$index] = is_numeric($value) ? floatval($value) : false;
+        $arraytoforce[$index] = is_numeric($value) ? (float) $value : false;
         break;
       default:
          $arraytoforce[$index] = false;
