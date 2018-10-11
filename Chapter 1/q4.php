@@ -64,8 +64,8 @@
 
         $change = 0;
 
-        validate($pprice = GetPost('pprice', FLOAT, 0));
-        validate($tendered = GetPost('tendered', FLOAT, 0));
+        validate($pprice = GetPost('pprice', FLOAT));
+        validate($tendered = GetPost('tendered', FLOAT));
 
         if($tendered < $pprice){
           exit('You do not have enough money to complete this transaction');

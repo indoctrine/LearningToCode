@@ -22,22 +22,32 @@
       - Updated to use type declarations rather than math functions.
       - Corrected array forcing function to include rounding on integer values,
         omitted by mistake in the first place.
+    11 October 2018
+      - Made default value parameter optional with a default value of 0.
+      - Added checks to check if the POST variables are set, if not,
+        return the default value.
+      - Added a check for non-compliant values in the case of numeric type casts.
+        Non-compliant values will be set to 0.
 */
 
 const INT = 0;
 const STRING = 1;
 const FLOAT = 2;
 
-function GetPost($key, $type, $defaultval){
-  $value = $_POST[$key] ?? $defaultval;
+function GetPost($key, $type, $defaultval = 0){ //Specify $_POST array key, variable type and optional default value if fail.
+  $value = !empty($_POST[$key]) || $_POST[$key] != "" ? $_POST[$key] : $defaultval; //If POST variables are not set, return the default value.
 
   switch($type){
     case INT:
-      return is_numeric($value) ? (int) round($value) : false;
+      $value = is_numeric($value) ? (int) round($value) : false;
+      $value = !$value ? 0 : $value;
+      return $value;
     case STRING:
       return (string) $value;
     case FLOAT:
-      return is_numeric($value) ? (float) $value : false;
+      $value = is_numeric($value) ? (float) $value : false;
+      $value = !$value ? 0 : $value;
+      return $value;
     }
 }
 

@@ -19,6 +19,8 @@
         superfluous parts of validation.
       - 5 August 2018 - Updated double quotes to singles. Included helper functions
         file and implemented pluraliser.
+      - 11 October 2018 - Added condition to additional validation. Removed superfluous
+        $defaultval for GetPost() now that function has been made more useful.
 */
 
 ?>
@@ -49,9 +51,9 @@
 
         foreach($unitmap as $unit => $secsperunit){
 
-          $value = GetPost($unit, INT, 0);
+          $value = GetPost($unit, INT, 's');
 
-          if($value < 0){
+          if($value < 0 || is_null($value)){
             $value = 0;   //Validation
           }
 
