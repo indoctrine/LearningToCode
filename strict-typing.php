@@ -35,20 +35,20 @@ const STRING = 1;
 const FLOAT = 2;
 
 function GetPost($key, $type, $defaultval = 0){ //Specify $_POST array key, variable type and optional default value if fail.
-  $value = !empty($_POST[$key]) || $_POST[$key] != "" ? $_POST[$key] : $defaultval; //If POST variables are not set, return the default value.
+  if(isset($_POST[$key])){
+    $value = !empty($_POST[$key]) || $_POST[$key] != "" ? $_POST[$key] : $defaultval; //If POST variables are not set, return the default value.
 
-  switch($type){
-    case INT:
-      $value = is_numeric($value) ? (int) round($value) : false;
-      $value = !$value ? 0 : $value;
-      return $value;
-    case STRING:
-      return (string) $value;
-    case FLOAT:
-      $value = is_numeric($value) ? (float) $value : false;
-      $value = !$value ? 0 : $value;
-      return $value;
-    }
+    switch($type){
+      case INT:
+        $value = is_numeric($value) ? (int) round($value) : 0;
+        return $value;
+      case STRING:
+        return (string) $value;
+      case FLOAT:
+        $value = is_numeric($value) ? (float) $value : 0;
+        return $value;
+      }
+  }
 }
 
 function ForceArrayType($arraytoforce, $type){
