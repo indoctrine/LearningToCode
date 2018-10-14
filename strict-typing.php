@@ -28,6 +28,10 @@
         return the default value.
       - Added a check for non-compliant values in the case of numeric type casts.
         Non-compliant values will be set to 0.
+    13 October 2018
+      - Minor updates to checks about whether $_POST is set.
+    14 October 2018
+      - Updated STRING case to use htmlentities() to prevent code injection.
 */
 
 const INT = 0;
@@ -43,7 +47,7 @@ function GetPost($key, $type, $defaultval = 0){ //Specify $_POST array key, vari
         $value = is_numeric($value) ? (int) round($value) : 0;
         return $value;
       case STRING:
-        return (string) $value;
+        return htmlentities((string) $value);
       case FLOAT:
         $value = is_numeric($value) ? (float) $value : 0;
         return $value;
@@ -58,7 +62,7 @@ function ForceArrayType($arraytoforce, $type){
         $arraytoforce[$index] = is_numeric($value) ? (int) round($value) : false;
         break;
       case STRING:
-        $arraytoforce[$index] = (string) $value;
+        $arraytoforce[$index] = htmlentities((string) $value);
         break;
       case FLOAT:
         $arraytoforce[$index] = is_numeric($value) ? (float) $value : false;
