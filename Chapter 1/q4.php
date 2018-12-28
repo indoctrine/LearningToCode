@@ -38,45 +38,26 @@
 
 */
 
-?>
-<!doctype html>
-<html>
-  <head>
-    <title>Question 4 - Local</title>
-  </head>
-  <body>
-    <form id="form" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
-      <div id="inputs">
-        Purchase Price: $<input type="number" name="pprice" step="any"><br>
-        Amount Tendered: $<input type="number" name="tendered" step="any"><br>
-      </div>
-      <input type="submit" name="submit">
-      <br>
-    </form>
-    <br>
-    <?php
-      if(isset($_POST["submit"])){
-        function validate($input){
-          if($input <= 0){
-            exit('Please enter a positive number.');
-          }
-        }
-
-        $change = 0;
-
-        validate($pprice = GetPost('pprice', FLOAT));
-        validate($tendered = GetPost('tendered', FLOAT));
-
-        if($tendered < $pprice){
-          exit('You do not have enough money to complete this transaction');
-        }
-
-        $change = $tendered - $pprice;
-
-        echo 'Purchase Price: $' . number_format($pprice, 2);
-        echo '<br> Amount Tendered: $' . number_format($tendered, 2);
-        echo '<br> Change Due: $' . number_format($change, 2);
+  if(isset($_POST["submit"])){
+    function validate($input){
+      if($input <= 0){
+        exit('Please enter a positive number.');
       }
-    ?>
-  </body>
-</html>
+    }
+
+    $change = 0;
+
+    validate($pprice = GetPost('pprice', FLOAT));
+    validate($tendered = GetPost('tendered', FLOAT));
+
+    if($tendered < $pprice){
+      exit('You do not have enough money to complete this transaction');
+    }
+
+    $change = $tendered - $pprice;
+
+    echo 'Purchase Price: $' . number_format($pprice, 2);
+    echo '<br> Amount Tendered: $' . number_format($tendered, 2);
+    echo '<br> Change Due: $' . number_format($change, 2);
+  }
+?>

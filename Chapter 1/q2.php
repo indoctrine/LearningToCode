@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+  declare(strict_types=1);
       require_once('../strict-typing.php');
       require_once('../helperfunctions.php');
 /*
@@ -21,51 +22,32 @@
         file and implemented pluraliser.
       - 11 October 2018 - Added condition to additional validation. Removed superfluous
         $defaultval for GetPost() now that function has been made more useful.
+      - 23 December 2018 - Moved a chunk of PHP off to an AJAX specific PHP file.
+                         - Submit button now does AJAX call and does not refresh page.        
 */
 
-?>
-<!doctype html>
-<html>
-  <head>
-    <title>Question 2 - Local</title>
-  </head>
-  <body>
-    <form id="form" method="POST" action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>">
-      <div id="inputs">
-        Hours: <input type="number" name="hour"><br>
-        Minutes: <input type="number" name="minute"><br>
-        Seconds: <input type="number" name="second"><br>
-      </div>
-      <p id="errormsg" style="color: #FF0000"></p>
-      <input type="submit" name="submit">
-      <br>
-    </form>
-    <br>
-    <?php
-      if(isset($_POST['submit'])){
-        $total = 0;
-        $unitmap = array(
-          'hour' => 3600,
-          'minute' => 60,
-          'second' => 1);
+  if(isset($_POST['submit'])){
+    $total = 0;
+    $unitmap = array(
+      'hour' => 3600,
+      'minute' => 60,
+      'second' => 1);
 
-        foreach($unitmap as $unit => $secsperunit){
+    foreach($unitmap as $unit => $secsperunit){
 
-          $value = GetPost($unit, INT, 's');
+      $value = GetPost($unit, INT, 0);
 
-          if($value < 0 || is_null($value)){
-            $value = 0;   //Validation
-          }
-
-          $total += $value * $secsperunit;
-
-          $unit .= pluraliser($value);
-
-          echo "$value $unit ";
-        }
-
-        echo "<br> Totals: $total second" . pluraliser($total) . '.';
+      if($value < 0 || is_null($value)){
+        $value = 0;   //Validation
       }
-    ?>
-  </body>
-</html>
+
+      $total += $value * $secsperunit;
+
+      $unit .= pluraliser($value);
+
+      echo "$value $unit ";
+    }
+
+    echo "<br> Totals: $total second" . pluraliser($total) . '.';
+  }
+?>

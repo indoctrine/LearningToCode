@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Question 1 - Local</title>
+  </head>
+  <body>
+    <style>
+      p{
+        display: inline-block;
+        white-space: pre;
+      }
+      #errormsg{
+        color: #FF0000;
+      }
+    </style>
+    <form id="form" method="POST">
+      <input id="addmore" type="button" value="Add more inputs">
+      <div id="inputs">
+        <p>Number 1:</p> <input type="number" name="numberlist[]" step="any"><br>
+      </div>
+      <p id="errormsg"></p>
+      <br>
+      <br>
+      <input type="submit" name="submit" value="Submit">
+    </form>
+    <p id="output"></p>
+    <script src="../jquery-3.3.1.js"></script>
+    <script src="q1.js"></script>
+  </body>
+</html>
