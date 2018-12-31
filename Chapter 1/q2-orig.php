@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-
+/*
                   Discrete Mathematics for Computing
                                 Chapter 1
                                 Question 2
